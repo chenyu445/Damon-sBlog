@@ -1,8 +1,7 @@
 
-<template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+<template lang="pug">
+  div#id
+    router-view
 </template>
 
 <script>

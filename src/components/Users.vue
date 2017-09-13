@@ -1,61 +1,44 @@
-<template>
-  <div class="users right-side">
-    <section class="content-header">
-      <h1>
-        用户列表
-        <small>用户</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="/admin/index"><i class="fa fa-dashboard"></i> 管理中心</a></li>
-        <li><a href="/admin/article">用户</a></li>
-        <li class="active">用户列表</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title"></h3>
-              <router-link to="/admin/addUser" class="btn btn-default pull-right">添加用户</router-link>
-            </div><!-- /.box-header -->
-            <div class="box-body">
-              <table class="table table-bordered  table-hover">
-                <thead>
-                <tr>
-                  <th style="width: 10px">#</th>
-                  <th>用户名</th>
-                  <th>用户状态</th>
-                  <th>用户组</th>
-                  <th>工作量</th>
-                  <th style="width: 20%">操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(item ,index) in users">
-                  <td>{{ index+1 }}</td>
-                  <td>{{ item.name }}</td>
-                  <td>{{ item.status == 'inuse' ? '已启用' :'已禁用' }}</td>
-                  <td>{{ item.roletype  }}</td>
-                  <td>{{ item.taskNum != -1 ? item.taskNum :'查询错误'  }}</td>
-                  <td>
-                    <button class="btn" :class="item.status == 'inuse' ? 'btn-danger' :'btn-primary'" @click="editUser(item)">{{ item.status == 'inuse' ? '禁用' :'启用' }}</button>
-                    <button class="btn btn-default" :disabled="item.status == 'inuse' ? false :true" @click="removeTask(item)" > 清除任务</button>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div><!-- /.box-body -->
-            <div class="box-footer clearfix">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section><!-- /.content -->
-  </div>
+<template lang="pug">
+  .users.right-side
+    section.content-header
+      h1  用户列表
+        small 用户
+      ol.breadcrumb
+        li
+          router-link(to="/admin")
+            i.fa.fa-dashboard
+            span 管理中心
+        li
+          router-link(to="/admin/users")
+          span 用户列表
+        li.active 用户列表
+    section.content
+      .row
+        .col-md-12
+          .box
+            .box-header
+              h3.box-title
+              router-link.btn.btn-default.pull-right(to="/admin/addUser") 添加用户
+            .box-body
+              table.table.table-bordered.table-hover
+                .thead
+                  tr
+                    th(style="width: 10px") #
+                    th 用户名
+                    th 用户状态
+                    th 工作量
+                    th(style="width: 20%") 操作
+                tbody
+                  tr(v-for="(item ,index) in users")
+                    td {{ index+1 }}
+                    td {{ item.name }}
+                    td {{ item.status == 'inuse' ? '已启用' :'已禁用' }}
+                    td {{ item.roletype }}
+                    td {{ tem.taskNum != -1 ? item.taskNum :'查询错误' }}
+                    td
+                      button.btn(:class="item.status == 'inuse' ? 'btn-danger' :'btn-primary'" @click="editUser(item)") {{ item.status == 'inuse' ? '禁用' :'启用' }}
+                      button.btn.btn-defaul(:disabled="item.status == 'inuse' ? false :true" @click="removeTask(item)") 清除任务
+            .box-footer.clearfix
 </template>
 
 <script>

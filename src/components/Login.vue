@@ -1,26 +1,16 @@
-<template>
-  <div class="signinpanel">
-    <div class="row">
-      <div class="col-sm-6 col-sm-offset-3">
-        <!--<form>-->
-        <div>
-          <h4 class="no-margins" style="font-weight:bold; font-size:24px;">管理员登录</h4>
-          <input type="text" class="form-control uname" placeholder="用户名" v-model="user.name" />
-          <input type="password" class="form-control pword m-b" placeholder="密码" v-model="user.passwd" />
-          <p>{{error}}</p>
-          <a href="#" class="forget">忘记密码了？</a>
-          <button class="btn btn-success btn-block" @click="login">登 录</button>
-        </div>
-
-        <!--</form>-->
-      </div>
-    </div>
-    <div class="signup-footer">
-      <div class="text-center">
-        &copy; 2017 All Rights Reserved. Beyondsoft
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+  .signinpanel
+    .row
+      .col-sm-6.col-sm-offset-3
+        div
+          h4.no-margins(style="font-weight:bold; font-size:24px;") 管理员登录
+          input(type="text" class="form-control uname" placeholder="用户名" v-model="user.name")
+          input(type="password" class="form-control pword m-b" placeholder="密码" v-model="user.passwd")
+          p {{error}}
+          a.forget 忘记密码了？
+          button.btn.btn-success.btn-block(@click="login") 登 录
+    .signup-footer
+      .text-center &copy; 2017 All Rights Reserved. Beyondsoft
 </template>
 
 <script>

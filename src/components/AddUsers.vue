@@ -1,76 +1,47 @@
-<template>
-  <div class="addUsers right-side">
-    <section class="content-header">
-      <h1>
-        用户添加
-        <!--<small>用户</small>-->
-      </h1>
-      <ol class="breadcrumb">
-        <li><router-link to="/admin"><i class="fa fa-dashboard"></i> 管理中心</router-link></li>
-        <li><router-link to="/admin/users">用户</router-link></li>
-        <li class="active">用户添加</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box">
-            <div>
-              <div class="box-header">
-                <h3 class="box-title"></h3>
-                <router-link to="/admin/addUser">用户添加</router-link>
-              </div>
-              <!-- /.box-header -->
-              <div class="box-body">
-                <div class="form-horizontal">
-                  <div class="form-group">
-                    <label for="inputSubject" class="col-sm-2 control-label">用户名称</label>
-                    <div class="col-sm-10">
-                      <input type="text" name="title" placeholder="用户名称" id="inputSubject" class="form-control " v-model="user.name">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="userpwd" class="col-sm-2 control-label">用户密码</label>
-                    <div class="col-sm-10">
-                      <input type="text" name="title" placeholder="用户密码" id="userpwd" class="form-control" v-model="user.passwd">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="usetypes" class="col-sm-2 control-label">用户类型</label>
-                    <div class="col-sm-10">
-                      <select type="text" name="types" id="usetypes" class="form-control" v-model="user.roletype">
-                        <option disabled value="">请选择</option>
-                        <option v-for="rol in role" :value="rol.type">{{rol.type}}</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <div class="checkbox">
-                        <label for="userKey">
-                          <input type="checkbox" name="userKey" id="userKey" v-model="user.preStatus" >状态
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="box-footer clearfix">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button class="btn btn-primary" @click="submit">提交</button>
-                    </div>
-                  </div>
-                  <!--<button class="btn btn-info" type="submit" name="submit" value="save">仅保存</button>-->
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+<template lang="pug">
+  div.addUsers.right-side
+    section.content-header
+      h1 用户添加
+      ol.breadcrumb
+        li
+          router-link(to="/admin")
+            i.fa.fa-dashboard
+            span 管理中心
+        li
+          router-link(to="/admin/users") 用户列表
+        li.active 用户添加
+    section.content
+      .row
+        .col-md-12
+          .box
+            div
+              .box-header
+                h3.box-title
+                router-link(to="/admin/addUser") 用户添加
+              .box-body
+                .form-horizontal
+                  .form-group
+                    label.col-sm-2.control-label(for="inputSubject") 用户名称
+                    .col-sm-10
+                      input#inputSubject.form-control(type="text" name="title" placeholder="用户名称" v-model="user.name")
+                  .form-group
+                    label.col-sm-2.control-label(for="userpwd" class="") 用户密码
+                    .col-sm-10
+                      input.form-control#userpwd(type="text" name="title" placeholder="用户密码" v-model="user.passwd")
+                  .form-group
+                    label.col-sm-2.control-label(for="usetypes") 用户类型
+                    .col-sm-10
+                      select.form-control#usetypes(type="text" name="types" v-model="user.roletype")
+                        option(disabled value="") 请选择
+                        option(v-for="rol in role" :value="rol.type") {{rol.type}}
+                  .form-group
+                    .col-sm-offset-2.col-sm-10
+                      .checkbox
+                        label(for="userKey")
+                          input(type="checkbox" name="userKey" id="userKey" v-model="user.preStatus")  启用
+                  .box-footer.clearfix
+                    .col-sm-offset-2.col-sm-10
+                      button.btn.btn-primary( @click="submit") 提交
 </template>
 
 <script>
