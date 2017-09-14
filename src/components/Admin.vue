@@ -72,7 +72,7 @@
                   router-link(to="/admin/bucket")
                     i.fa.fa-list
                     span Bucket列表
-                li
+                //- li
                   router-link(to="/admin/addBucket")
                     i.fa.fa-list
                     span Bucket添加

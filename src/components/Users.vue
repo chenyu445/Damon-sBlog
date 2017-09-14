@@ -10,7 +10,7 @@
             span 管理中心
         li
           router-link(to="/admin/users")
-          span 用户列表
+            span 用户列表
         li.active 用户列表
     section.content
       .row
@@ -21,12 +21,13 @@
               router-link.btn.btn-default.pull-right(to="/admin/addUser") 添加用户
             .box-body
               table.table.table-bordered.table-hover
-                .thead
+                thead
                   tr
                     th(style="width: 10px") #
-                    th 用户名
-                    th 用户状态
-                    th 工作量
+                    th  用户名
+                    th  用户状态
+                    th  用户组
+                    th  工作量
                     th(style="width: 20%") 操作
                 tbody
                   tr(v-for="(item ,index) in users")
@@ -34,7 +35,7 @@
                     td {{ item.name }}
                     td {{ item.status == 'inuse' ? '已启用' :'已禁用' }}
                     td {{ item.roletype }}
-                    td {{ tem.taskNum != -1 ? item.taskNum :'查询错误' }}
+                    td {{ item.taskNum != -1 ? item.taskNum :'查询错误' }}
                     td
                       button.btn(:class="item.status == 'inuse' ? 'btn-danger' :'btn-primary'" @click="editUser(item)") {{ item.status == 'inuse' ? '禁用' :'启用' }}
                       button.btn.btn-defaul(:disabled="item.status == 'inuse' ? false :true" @click="removeTask(item)") 清除任务

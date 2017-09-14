@@ -10,7 +10,7 @@
             span 管理中心
         li
           router-link(to="/admin/bucket")
-          span Buckets
+            span Buckets
         li.active Buckets列表
     section.content
       .row
@@ -26,19 +26,22 @@
                     th(style="width: 10px") #
                     th bucket
                     th 类型
+                    th 是否双盲
                     th 标注进度
                     th 已标注
                     th 总量
-                    th(style="width: 20%") 备注
+                    th(style="width: 20%") 操作
                 tbody
                   tr(v-for="(item ,index) in buckets")
                     td {{ index+1 }}
                     td {{ item.name }}
                     td {{ JSON.stringify(item.buckettypes).replace(/\[/g,'').replace(/\]/g,'') }}
-                    td {{ (item.annotatedfilenum / item.totalfilenum) * 100 + "%" }}
+                    td {{ item.doubleblind == "disable" ? '未启用' : '已启用'  }}
+                    td {{ item.totalfilenum != 0 ? (item.annotatedfilenum / item.totalfilenum) * 100 + "%" : "0%"}}
                     td {{ item.annotatedfilenum != -1 ? item.annotatedfilenum : '查询错误' }}
                     td {{ item.totalfilenum != -1 ? item.totalfilenum : '查询错误' }}
                     td
+                      button.btn(:class="item.doubleblind != 'disable' ? 'btn-danger' :'btn-primary'" @click="editDoubleBlind(item)") {{ item.doubleblind != "disable"  ? '禁用' :'启用' }}
             .box-footer.clearfix
     iframe.hide#downloadIframe(src="" frameborder="0")
 </template>
@@ -67,6 +70,20 @@ export default {
         }
       })
 //      document.getElementById('downloadIframe').src = '/static/js.tar.gz'
+    },
+    editDoubleBlind: function(bucket){
+      var user = JSON.parse(this.$cookie.get('user'))
+      var newStatus = bucket.doubleblind  == "disable" ? 'enable' : 'disable'
+      axios.post('/api/bucketDoubleBlind' ,JSON.stringify({
+        token:user.token,
+        bucketid:bucket.id,
+        status: newStatus
+      })).then(function(d){
+        console.log(d)
+        if(d.data.code == 1){
+          bucket.doubleblind = newStatus
+        }
+      })
     }
   },
   beforeMount: function(){

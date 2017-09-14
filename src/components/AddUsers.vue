@@ -38,7 +38,8 @@
                     .col-sm-offset-2.col-sm-10
                       .checkbox
                         label(for="userKey")
-                          input(type="checkbox" name="userKey" id="userKey" v-model="user.preStatus")  启用
+                          input(type="checkbox" name="userKey" id="userKey" v-model="user.preStatus")
+                          span 启用
                   .box-footer.clearfix
                     .col-sm-offset-2.col-sm-10
                       button.btn.btn-primary( @click="submit") 提交
