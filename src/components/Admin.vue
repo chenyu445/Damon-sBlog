@@ -3,12 +3,12 @@
     header.header
       nav.navbar.navbar-static-top(role="navigation" )
         a .navbar-btn.sidebar-toggle(data-toggle="offcanvas" role="button")
-          span.sr-only Toggle navigation
+          span.sr-only.Toggle.navigation
           span.icon-bar
           span.icon-bar
           span.icon-bar
         div.navbar-right
-          ul.nav navbar-nav
+          ul.nav.navbar-nav
             li.dropdown.user.user-menu
               a.dropdown-toggle(data-toggle="dropdown")
                 i.glyphicon.glyphicon-user
